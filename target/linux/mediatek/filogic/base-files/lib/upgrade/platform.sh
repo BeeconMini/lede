@@ -55,6 +55,7 @@ platform_do_upgrade() {
 		CI_ROOTPART="rootfs"
 		emmc_do_upgrade "$1"
 		;;
+	beeconmini,seed-ac1|\
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac3)
 		CI_KERNPART="kernel"
@@ -106,6 +107,7 @@ platform_copy_config() {
 			;;
 		esac
 		;;
+	beeconmini,seed-ac1|\
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac3|\
 	cmcc,rax3000m-emmc|\

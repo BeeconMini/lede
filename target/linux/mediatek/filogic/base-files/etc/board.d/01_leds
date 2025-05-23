@@ -22,6 +22,9 @@ bananapi,bpi-r4-poe)
 	ucidef_set_led_netdev "lan2" "lan2" "mt7530-0:02:green:lan" "lan2" "link tx rx"
 	ucidef_set_led_netdev "lan3" "lan3" "mt7530-0:03:green:lan" "lan3" "link tx rx"
 	;;
+beeconmini,seed-ac1)
+	ucidef_set_led_netdev "wan" "WAN" "led_wan" "eth1" "link tx rx"
+	;;
 hf,m7986r1*)
 	ucidef_set_led_netdev "led-1" "LAN1" "led-1" "lan1"
 	ucidef_set_led_netdev "led-2" "LAN2" "led-2" "lan2"
