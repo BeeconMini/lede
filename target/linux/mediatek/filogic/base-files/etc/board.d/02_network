@@ -93,6 +93,7 @@ mediatek_setup_interfaces()
 	beeconmini,seed-ac2)
 		ucidef_set_interfaces_lan_wan eth0 eth1
 		;;
+	beeconmini,seed-ac5|\
 	beeconmini,seed-ac3)
 		ucidef_set_interfaces_lan_wan eth1 eth0
 		;;
@@ -163,6 +164,7 @@ mediatek_setup_macs()
 		wan_mac=$(mtd_get_mac_ascii Bdata ethaddr_wan)
 		label_mac=$wan_mac
 		;;
+	beeconmini,seed-ac5|\
 	beeconmini,seed-ac3|\
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac1)

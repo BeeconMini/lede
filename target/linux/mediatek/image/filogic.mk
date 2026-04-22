@@ -353,6 +353,16 @@ define Device/beeconmini_seed-ac3
 endef
 TARGET_DEVICES += beeconmini_seed-ac3
 
+define Device/beeconmini_seed-ac5
+  DEVICE_VENDOR := BeeconMini
+  DEVICE_MODEL := SEED AC5
+  DEVICE_DTS := mt7987a-beeconmini-seed-ac5
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-fs-f2fs kmod-fs-ext4 mkf2fs e2fsprogs kmod-switch-rtl8373n-ac5 kmod-usb3 mt7987-2p5g-phy-firmware kmod-phy-airoha-en8811h
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += beeconmini_seed-ac5
+
 define Device/cetron_ct3003
   DEVICE_VENDOR := Cetron
   DEVICE_MODEL := CT3003

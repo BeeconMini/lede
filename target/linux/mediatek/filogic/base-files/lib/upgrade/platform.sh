@@ -59,6 +59,7 @@ platform_do_upgrade() {
 		CI_ROOTPART="rootfs"
 		emmc_do_upgrade "$1"
 		;;
+	beeconmini,seed-ac5|\
 	beeconmini,seed-ac3|\
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac1)
@@ -118,6 +119,7 @@ platform_copy_config() {
 	beeconmini,seed-ac1|\
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac3|\
+	beeconmini,seed-ac5|\
 	cmcc,rax3000m-emmc|\
 	cmcc,xr30-emmc|\
 	glinet,gl-mt2500|\
