@@ -1,0 +1,72 @@
+Index: linux-6.12.79/drivers/net/phy/realtek/realtek_main.c
+===================================================================
+--- linux-6.12.79.orig/drivers/net/phy/realtek/realtek_main.c
++++ linux-6.12.79/drivers/net/phy/realtek/realtek_main.c
+@@ -166,6 +166,12 @@
+ #define RTL8221B_PHYCR1_ALDPS_EN		BIT(2)
+ #define RTL8221B_PHYCR1_ALDPS_XTAL_OFF_EN	BIT(12)
+ 
++#define RTL8221B_NR_LEDS				3
++#define RTL8221B_LED_LINK_SELECT		0xd032
++#define RTL8221B_LED_LINK_SELECT_OFFSET	0x2
++#define RTL8221B_LED_ACT_SELECT		0xd040
++#define RTL8221B_LED_POLARITY_SELECT		0xd044
++
+ #define RTL8366RB_POWER_SAVE			0x15
+ #define RTL8366RB_POWER_SAVE_ON			BIT(12)
+ 
+@@ -1242,6 +1248,45 @@ static int rtl822x_probe(struct phy_devi
+ 	return 0;
+ }
+ 
++static int rtl8221b_config_led(struct phy_device *phydev) {
++	struct device *node = &phydev->mdio.dev;
++	u32 link_select[RTL8221B_NR_LEDS];
++	u32 act_select, polarity_select;
++	int i, val;
++
++	val = device_property_read_u32_array(node, "realtek,led-link-select",
++			link_select, RTL8221B_NR_LEDS);
++	if (!val) {
++		for (i = 0; i < RTL8221B_NR_LEDS; i++) {
++			val = phy_write_mmd(phydev, MDIO_MMD_VEND2,
++				RTL8221B_LED_LINK_SELECT + i * RTL8221B_LED_LINK_SELECT_OFFSET,
++				link_select[i]);
++			if (val < 0)
++				return val;
++		}
++	}
++
++	val = device_property_read_u32(node,
++			"realtek,led-act-select", &act_select);
++	if (!val) {
++		val = phy_write_mmd(phydev, MDIO_MMD_VEND2,
++				RTL8221B_LED_ACT_SELECT, act_select);
++		if (val < 0)
++			return val;
++	}
++
++	val = device_property_read_u32(node,
++			"realtek,led-polarity-select", &polarity_select);
++	if (!val) {
++		val = phy_write_mmd(phydev, MDIO_MMD_VEND2,
++				RTL8221B_LED_POLARITY_SELECT, polarity_select);
++		if (val < 0)
++			return val;
++	}
++
++	return 0;
++}
++
+ static int rtl822x_set_serdes_option_mode(struct phy_device *phydev, bool gen1)
+ {
+ 	bool has_2500, has_sgmii;
+@@ -1337,7 +1382,7 @@ static int rtl822x_set_serdes_option_mod
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	return 0;
++	return rtl8221b_config_led(phydev);
+ }
+ 
+ static int rtl822x_config_init(struct phy_device *phydev)
