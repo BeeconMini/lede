@@ -59,6 +59,7 @@ platform_do_upgrade() {
 		CI_ROOTPART="rootfs"
 		emmc_do_upgrade "$1"
 		;;
+	beeconmini,seed-ac5s|\
 	beeconmini,seed-ac5|\
 	beeconmini,seed-ac3|\
 	beeconmini,seed-ac2|\
@@ -67,6 +68,9 @@ platform_do_upgrade() {
 		CI_ROOTPART="rootfs"
 		CI_DATAPART="rootfs_data"
 		emmc_do_upgrade "$1"
+		;;
+	beeconmini,seed-ac5s-nor)
+		default_do_upgrade "$1"
 		;;
 	*)
 		nand_do_upgrade "$1"
@@ -120,6 +124,7 @@ platform_copy_config() {
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac3|\
 	beeconmini,seed-ac5|\
+	beeconmini,seed-ac5s|\
 	cmcc,rax3000m-emmc|\
 	cmcc,xr30-emmc|\
 	glinet,gl-mt2500|\
