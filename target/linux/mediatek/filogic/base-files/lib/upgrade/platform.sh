@@ -116,6 +116,7 @@ platform_do_upgrade() {
 		CI_ROOT_UBIPART=ubi
 		nand_do_upgrade "$1"
 		;;
+	beeconmini,seed-ac5|\
 	beeconmini,seed-ac3|\
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac1)
@@ -173,6 +174,7 @@ platform_copy_config() {
 			;;
 		esac
 		;;
+	beeconmini,seed-ac5|\
 	beeconmini,seed-ac3|\
 	beeconmini,seed-ac2|\
 	beeconmini,seed-ac1|\
