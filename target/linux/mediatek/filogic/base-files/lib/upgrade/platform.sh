@@ -116,6 +116,7 @@ platform_do_upgrade() {
 		CI_ROOT_UBIPART=ubi
 		nand_do_upgrade "$1"
 		;;
+	beeconmini,seed-ac2|\
 	beeconmini,seed-ac1)
 		CI_KERNPART="kernel"
 		CI_ROOTPART="rootfs"
@@ -171,6 +172,7 @@ platform_copy_config() {
 			;;
 		esac
 		;;
+	beeconmini,seed-ac2|\
 	beeconmini,seed-ac1|\
 	cmcc,rax3000m-emmc|\
 	cmcc,rax3000me-emmc|\
